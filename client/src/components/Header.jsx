@@ -8,6 +8,13 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { list } = useWishList();
     const { cartList } = useCart();
+    const navItems = [
+        { path: '/', label: 'Home' },
+        { path: '/shoes/men', label: 'Men' },
+        { path: '/shoes/women', label: 'Women' },
+        { path: '/shoes/kids', label: 'Kids' },
+        { path: '/about-us', label: 'About Us' },
+    ];
 
     // Toggle the menu
     const toggleMenu = () => setIsOpen(prev => !prev);
@@ -48,8 +55,7 @@ const Header = () => {
             <div className={`flex flex-col md:flex-row md:items-center ${isOpen ? 'block' : 'hidden md:flex'}`}>
                 {/* Links */}
                 <ul className='flex flex-col md:flex-row md:gap-4 md:pr-6'>
-                    {['/', '/shoes/men', '/shoes/women', '/shoes/kids'].map((path, index) => {
-                        const labels = ['Home', 'Men', 'Women', 'Kids'];
+                    {navItems.map(({ path, label }) => {
                         return (
                             <li key={path} className='hover:bg-slate-100 transition-all duration-300 delay-100 p-2 rounded'>
                                 <NavLink
@@ -57,7 +63,7 @@ const Header = () => {
                                     onClick={toggleMenu}
                                     className={({ isActive }) => `${isActive ? 'font-extrabold' : ''}`}
                                 >
-                                    {labels[index]}
+                                    {label}
                                 </NavLink>
                             </li>
                         );
